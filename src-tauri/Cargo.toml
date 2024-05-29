@@ -1,0 +1,33 @@
+[package]
+name = "toolkit-toys"
+version = "1.1.0"
+description = "toolkit toys"
+authors = ["jing.wang"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = [ "path-all", "clipboard-all", "dialog-all", "shell-open"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+nanoid = "0.4.0"
+
+[dependencies.tauri-plugin-sql]
+features = ["sqlite"]
+git = "https://github.com/tauri-apps/plugins-workspace"
+branch = "v1"
+
+[features]
+# This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+panic = "abort"     #当发生panic时，去除昂贵的panic 清理逻辑
+codegen-units = 1   #一个接一个的编译 crate， 以便编译器能够更好的进行优化
+lto = true          #启用链接优化
+opt-level = "s"     #为二进制大小进行优化
+strip = true        #去除调试符号

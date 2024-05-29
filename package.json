@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "scripts": {
+    "serve": "vite preview",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@mdi/font": "5.9.55",
+    "@tauri-apps/api": "^1.5.3",
+    "moment": "^2.30.1",
+    "nanoid": "^5.0.7",
+    "roboto-fontface": "*",
+    "sql-formatter": "^15.3.0",
+    "tauri-plugin-sql-api": "github:tauri-apps/tauri-plugin-sql#v1",
+    "vue": "^3.3.4",
+    "vue-cli-plugin-tauri": "^1.0.0",
+    "vue-i18n": "^9.13.1",
+    "vuetify": "^3.5.15",
+    "webfontloader": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.4.47",
+    "@tauri-apps/cli": "^1.5.11",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.0.0",
+    "vite-plugin-vuetify": "^2.0.3",
+    "vue-cli-plugin-vuetify": "~2.5.8",
+    "vuetify": "npm:@vuetify/nightly@latest"
+  },
+  "type": "module"
+}
