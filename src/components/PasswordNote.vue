@@ -54,7 +54,7 @@
 
             <v-card-text class="pa-2">
               <div class="text-body-1 border-md rounded border-primary d-flex ma-1 px-2 align-center cursor-pointer" 
-                @click="$globalUtils.writeClipboardText(item.ID)">
+                @click="copyText(item.ID)">
                 <div class="ma-1 me-auto">{{ item.ID }}</div>
                 <v-icon icon="mdi-content-copy" size="small"></v-icon>
               </div>
@@ -62,7 +62,7 @@
               <v-divider style="color: transparent;" :thickness="6"></v-divider>
 
               <div class="text-body-1 border-md rounded border-primary d-flex ma-1 px-2 align-center cursor-pointer" 
-                @click="$globalUtils.writeClipboardText(item.PW)">
+                @click="copyText(item.PW)">
                 <div class="ma-1 me-auto">********</div>
                 <v-icon icon="mdi-content-copy" size="small"></v-icon>
               </div>
@@ -77,7 +77,9 @@
 <script setup>
 import { ref, shallowRef, reactive, onMounted } from 'vue'
 import Database from "tauri-plugin-sql-api";
-
+import simpleAlert from '@/utils/simplealert';
+import useCurrentInstance from "@/hooks/useCurrentInstance"
+const { proxy } = useCurrentInstance();
 const dialog = shallowRef(false)
 const tempModel = reactive({ NO: 0, NAME: '', ID: '', PW: '' })
 const pwList = ref([]);
@@ -95,6 +97,11 @@ async function removeItem(item) {
   if (result) {
     pwList.value = pwList.value.filter(e => e.NO !== item.NO);
   }
+}
+
+function copyText(text) {
+  proxy.$globalUtils.writeClipboardText(text); 
+  simpleAlert.success('复制成功', {duration: 3000});
 }
 
 async function updateItem() {
